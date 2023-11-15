@@ -11,15 +11,14 @@ import ru.etu.lab.pinkeye.entity.Patient;
 import ru.etu.lab.pinkeye.service.PatientService;
 
 @RestController
-@RequestMapping(value="hospital/{hospital_id}/pinkeye")
+@RequestMapping(value="hospital/pinkeye")
 public class PatientController
 {
     @Autowired
     private PatientService patientService;
 
     @GetMapping("/{patient_id}")
-    public ResponseEntity<Patient> getPatient(@PathVariable("hospital_id") Integer hospital_id,
-                                              @PathVariable("patient_id") Integer patient_id)
+    public ResponseEntity<Patient> getPatient(@PathVariable("patient_id") Integer patient_id)
     {
         Patient res = patientService.getPatient(patient_id);
         if(res != null)

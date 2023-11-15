@@ -13,15 +13,16 @@ public class PatientService
     public PatientService()
     {
         bd = new HashMap<Integer, Patient>();
-        Patient buff;
-        buff = new Patient();
-        buff.setId(Integer.valueOf(1)); buff.setTemp(367); buff.setHospitalId(0); buff.setType(Boolean.valueOf(true));
-        bd.put(buff.getId(), buff);
+        for(int i = 0; i < 5051; i++)
+        {
+            Patient buff = Patient.genPatient();
+            bd.put(buff.getId(), buff);
+        }
     }
     public Patient getPatient(Integer patientId)
     {
         Patient res;
-        if(bd.containsKey(patientId) == true)
+        if( bd.containsKey(patientId) )
         {
             res = this.bd.get(patientId);
             return res;
