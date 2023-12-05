@@ -43,11 +43,23 @@ pip3 install requests
 
 В директории `py` лежат скрипты:
 
-- `lab1_test_1.py`
+- `lab_test_1.py`
 
-- `lab1_test_2.py`
+- `lab_test_2.py`
 
-- `lab1_test_3.py`
+- `lab_test_3.py`
 
-- `lab1_test_4.py`
+- `lab_test_4.py`
+
+## Тестирование второй работы
+
+В директории `py` лежат скрипты, но нужно менять переменную LOCALE:
+
+- `lab_test_1.py`
+
+- `lab_test_2.py`
+
+- `lab_test_3.py`
+
+- `lab_test_4.py`
 
