@@ -5,7 +5,7 @@
 # Необходимые пакеты
 
 ``` bash
-yay jdk-openjdk # archlinux-java хотя бы 17
+yay jdk-openjdk # java хотя бы 17
 archlinux-java get # get current verison
 archlinux-java status # list of available verison
 sudo archlinux-java set java-17-openjdk # set the required verison, such as java-17-openjdk
@@ -23,6 +23,31 @@ https://start.spring.io/
 
 ![](./imgs/spring_start.png)
 
-# Плагины
+# Необходимые плагины
 
 Нужно установить в `IntelliJ` плагин `Lombok`.
+
+# Запуск приложения
+
+Зайти на адрес `http://127.0.0.1:8080/hospital/pinkeye/{patient_id}`
+
+# Демонстрация
+
+Для тестирования нужен пакет `requests`:
+
+``` bash
+pip3 install requests
+```
+
+## Тестирование первой работы
+
+В директории `py` лежат скрипты:
+
+- `lab1_test_1.py`
+
+- `lab1_test_2.py`
+
+- `lab1_test_3.py`
+
+- `lab1_test_4.py`
+

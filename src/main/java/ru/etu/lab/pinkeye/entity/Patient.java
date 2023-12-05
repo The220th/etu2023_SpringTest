@@ -62,6 +62,39 @@ public class Patient
         return p;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private static String get_sub(List<String> arrrrr, int mid_start)
     {
         Random r = new Random();
