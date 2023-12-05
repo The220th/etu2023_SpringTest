@@ -51,7 +51,7 @@ pip3 install requests
 
 - `lab_test_4.py`
 
-## Тестирование второй работы
+## Тестирование второй работы (1)
 
 В директории `py` лежат скрипты, но нужно менять переменную LOCALE:
 
@@ -62,4 +62,30 @@ pip3 install requests
 - `lab_test_3.py`
 
 - `lab_test_4.py`
+
+# Тестирование второй работы (2)
+
+В директории `py` лежит скрипт `lab_test_2.py`. Нужно менять переменную LOCALE.
+
+## Тестирование второй работы (3)
+
+Переходить по ссылкам
+
+- http://127.0.0.1:8080/actuator
+
+- http://127.0.0.1:8080/actuator/health
+
+- http://127.0.0.1:8080/actuator/info
+
+- http://localhost:8080/actuator/beans (данные о bean-компонентах приложения)
+
+- http://localhost:8080/actuator/env (данные об окружении)
+
+- http://localhost:8080/actuator/metrics (все метрики)
+
+- http://localhost:8080/actuator/metrics/application.started.time (метрика: время для запуска приложения)
+
+- http://localhost:8080/actuator/metrics/http.server.requests (метрика: длительность обработки запроса HTTP-сервером)
+
+- http://localhost:8080/actuator/metrics/system.cpu.count (метрика: число доступных процессоров для JVM)
 

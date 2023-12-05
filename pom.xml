@@ -53,6 +53,12 @@
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</exclude>
+						<execution>
+							<id>build-info</id>
+							<goals>
+								<goal>build-info</goal>
+							</goals>
+						</execution>
 					</excludes>
 				</configuration>
 			</plugin>

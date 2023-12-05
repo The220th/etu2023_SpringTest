@@ -12,12 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.context.annotation.Bean;
+import org.springframework.boot.actuate.info.InfoContributor;
+import org.springframework.boot.actuate.info.MapInfoContributor;
+
 import org.springframework.http.HttpStatus;
 import ru.etu.lab.pinkeye.entity.Patient;
 import ru.etu.lab.pinkeye.service.PatientService;
 import org.springframework.context.MessageSource;
 
 import java.util.Locale;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -94,4 +100,18 @@ public class PatientController
         return ResponseEntity.ok(patientService.deletePatient(patient_id, locale));
     }
 
+    @Bean
+    InfoContributor getInfoContributor()
+    {
+        Map<String, Object> details = new HashMap<>();
+        details.put("nameApp", "Pinkeye");
+        details.put("developers", "The220th and Victor");
+        details.put("group", "9308");
+        details.put("email", "exmaple@mail.ru");
+
+        Map<String, Object> wrapper = new HashMap<>();
+        wrapper.put("info", details);
+        
+        return new MapInfoContributor(wrapper);
+    }
 }
