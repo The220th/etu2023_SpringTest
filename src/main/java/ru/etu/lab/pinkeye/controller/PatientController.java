@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.http.HttpStatus;
 import ru.etu.lab.pinkeye.entity.Patient;
 import ru.etu.lab.pinkeye.service.PatientService;
+import org.springframework.context.MessageSource;
 
 import java.util.Locale;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(value="hospital/pinkeye")
@@ -26,7 +30,7 @@ public class PatientController
     private PatientService patientService;
 
     @PostMapping("/{patient_id}")  // Добавление
-    public ResponseEntity<String> addArthritisCase(@PathVariable("patient_id") Integer patient_id,
+    public ResponseEntity<String> addPatient(@PathVariable("patient_id") Integer patient_id,
                                                    @RequestBody Patient request,
                                                    @RequestHeader(value = "Accept-Language",required = false) Locale locale)
     {
@@ -34,21 +38,49 @@ public class PatientController
     }
 
 
+//    @GetMapping("/{patient_id}")  // Получение
+//    public ResponseEntity<Patient> getPatient(@PathVariable("patient_id") Integer patient_id,
+//                                              @RequestHeader(value = "Accept-Language",required = false) Locale locale)
+//    {
+//        Patient res = patientService.getPatient(patient_id);
+//        if(res != null)
+//            return ResponseEntity.ok(res);
+//        else
+//            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//            // return ResponseEntity.notFound().build();
+//            // return ResponseEntity.notFound(null);
+//    }
+
     @GetMapping("/{patient_id}")  // Получение
     public ResponseEntity<Patient> getPatient(@PathVariable("patient_id") Integer patient_id,
                                               @RequestHeader(value = "Accept-Language",required = false) Locale locale)
     {
+        MessageSource messages = patientService.get_messages();
         Patient res = patientService.getPatient(patient_id);
         if(res != null)
+        {
+            res.add(
+                linkTo(methodOn(PatientController.class)
+                        .getPatient(patient_id, locale))
+                        .withSelfRel(),
+                linkTo(methodOn(PatientController.class)
+                        .addPatient(patient_id, res, locale))
+                        .withRel(messages.getMessage("create_link.message", null, locale)),
+                linkTo(methodOn(PatientController.class)
+                        .modPatient(patient_id, res, locale))
+                        .withRel(messages.getMessage("update_link.message", null, locale)),
+                linkTo(methodOn(PatientController.class)
+                        .deletePatient(patient_id, locale))
+                        .withRel(messages.getMessage("delete_link.message", null, locale))
+            );
             return ResponseEntity.ok(res);
-        else
+        } else {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-            // return ResponseEntity.notFound().build();
-            // return ResponseEntity.notFound(null);
+        }
     }
 
     @PutMapping(value = "/{patient_id}")  // Модификация
-    public ResponseEntity<String> editArthritisCase(@PathVariable("patient_id") Integer patient_id,
+    public ResponseEntity<String> modPatient(@PathVariable("patient_id") Integer patient_id,
                                                     @RequestBody Patient request,
                                                     @RequestHeader(value = "Accept-Language",required = false) Locale locale)
     {
@@ -56,7 +88,7 @@ public class PatientController
     }
 
     @DeleteMapping(value = "/{patient_id}")  // Удаление
-    public ResponseEntity<String> deleteArthritisCase(@PathVariable("patient_id") Integer patient_id,
+    public ResponseEntity<String> deletePatient(@PathVariable("patient_id") Integer patient_id,
                                                       @RequestHeader(value = "Accept-Language",required = false) Locale locale)
     {
         return ResponseEntity.ok(patientService.deletePatient(patient_id, locale));

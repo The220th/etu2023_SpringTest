@@ -8,11 +8,13 @@ import java.util.*;
 
 import java.util.Random;
 
+import org.springframework.hateoas.RepresentationModel;
+
 
 @Getter
 @Setter
 @ToString
-public class Patient
+public class Patient extends RepresentationModel<Patient>
 {
     private static int cur_number = 0;
     private static ArrayList<String> pathogen_list = get_pathogen_list();

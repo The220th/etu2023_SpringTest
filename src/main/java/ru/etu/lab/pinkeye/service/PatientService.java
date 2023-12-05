@@ -72,4 +72,9 @@ public class PatientService
         else
             return messages.getMessage("no_such_patient_with_id.message", null, locale) + patientId;
     }
+
+    public MessageSource get_messages() /*thx spring*/
+    {
+        return messages;
+    }
 }
