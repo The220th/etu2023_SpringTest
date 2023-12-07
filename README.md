@@ -114,3 +114,13 @@ pip3 install requests
 ## Тестирование третьей работы (3) (aka lab3.3)
 
 Не используйте `javax`.
+
+В директории `py` лежат скрипты:
+
+- `lab_test_1.py`
+
+- `lab_test_2.py`
+
+- `lab_test_3.py`
+
+- `lab_test_4.py`
