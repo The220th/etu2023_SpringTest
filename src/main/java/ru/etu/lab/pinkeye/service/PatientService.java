@@ -1,34 +1,34 @@
 package ru.etu.lab.pinkeye.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.etu.lab.pinkeye.entity.Patient;
+import ru.etu.lab.pinkeye.config.ServiceConfig;
 
 import java.util.Map;
-import java.util.HashMap;
 import java.util.Locale;
 
 import org.springframework.context.MessageSource;
 
+import ru.etu.lab.pinkeye.repository.PatientRepository;
+
 @Service
 public class PatientService
 {
-    private Map<Integer, Patient> bd;
-    private MessageSource messages;
+    private Boolean FILL_DB = true;
 
-    public PatientService(MessageSource messages)
-    {
-        this.messages = messages;
-        bd = new HashMap<Integer, Patient>();
-        for(int i = 0; i < 5051; i++)
-        {
-            Patient buff = Patient.genPatient();
-            bd.put(buff.getId(), buff);
-        }
-    }
+    private Map<Integer, Patient> bd;
+    @Autowired
+    private MessageSource messages;
+    @Autowired
+    private PatientRepository patientRepository;
+    @Autowired
+    private ServiceConfig config;
 
     public String addPatient(Integer patientId, Patient patient, Locale locale)
     {
-        String S = "";
+        gen_db();
+
         if(bd.containsKey(patientId))
             return messages.getMessage("patient_with_id.message", null, locale) + patientId + " " + messages.getMessage("already_exists.message", null, locale);
         else
@@ -41,6 +41,8 @@ public class PatientService
 
     public Patient getPatient(Integer patientId)
     {
+        gen_db();
+
         Patient res;
         if( bd.containsKey(patientId) )
         {
@@ -51,7 +53,10 @@ public class PatientService
             return null;
     }
 
-    public String replacePatient(Integer patientId, Patient patient, Locale locale) {
+    public String replacePatient(Integer patientId, Patient patient, Locale locale)
+    {
+        gen_db();
+
         if(bd.containsKey(patientId))
         {
             patient.setId(patientId);
@@ -64,6 +69,8 @@ public class PatientService
 
     public String deletePatient(Integer patientId, Locale locale)
     {
+        gen_db();
+
         if(bd.containsKey(patientId))
         {
             bd.remove(patientId);
@@ -71,6 +78,20 @@ public class PatientService
         }
         else
             return messages.getMessage("no_such_patient_with_id.message", null, locale) + patientId;
+    }
+
+    private void gen_db()
+    {
+        if(FILL_DB)
+        {
+            for(int i = 0; i < 10; i++)
+            {
+                Patient buff = Patient.genPatient();
+                patientRepository.save(buff);
+            }
+            FILL_DB = false;
+        }
+
     }
 
     public MessageSource get_messages() /*thx spring*/

@@ -10,10 +10,16 @@ import java.util.Random;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Getter
 @Setter
 @ToString
+@Entity
+@Table(name="patient")
 public class Patient extends RepresentationModel<Patient>
 {
     private static int cur_number = 0;
@@ -22,16 +28,24 @@ public class Patient extends RepresentationModel<Patient>
     private static ArrayList<String> symptoms_list = get_symptoms_list();
     private static ArrayList<String> complications_list = get_complications_list();
 
-
+    @Id
+    @Column(name = "id", nullable = false)
     private Integer id;
+    @Column(name = "temp", nullable = false)
     private Integer temp; // температура тела = temp/10
+    @Column(name = "pathogen", nullable = false)
     private String pathogen; // возбудитель
+    @Column(name = "cause", nullable = false)
     private String cause; // причина
+    @Column(name = "symptoms", nullable = false)
     private String symptoms; // симптомы
+    @Column(name = "kind", nullable = false)
     private Integer kind; // вид
                             // 1 - бактериальный, 2 - вирусный, 3 - аллергический, 4 - дистрофический, -1 - другое
+    @Column(name = "course", nullable = false)
     private Integer course; // течение
                             // 1 - острое, 2 - хроническое, -1 - другое
+    @Column(name = "complications", nullable = false)
     private String complications; // осложнения
 
     public static Patient genPatient()

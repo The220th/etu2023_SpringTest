@@ -110,3 +110,7 @@ pip3 install requests
 - http://localhost:8071/pinkeye/dev
 
 - http://localhost:8071/pinkeye/prod
+
+## Тестирование третьей работы (3) (aka lab3.3)
+
+Не используйте `javax`.
