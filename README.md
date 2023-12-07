@@ -39,7 +39,7 @@ https://start.spring.io/
 pip3 install requests
 ```
 
-## Тестирование первой работы
+## Тестирование первой работы (aka lab1)
 
 В директории `py` лежат скрипты:
 
@@ -51,7 +51,7 @@ pip3 install requests
 
 - `lab_test_4.py`
 
-## Тестирование второй работы (1)
+## Тестирование второй работы (1) (aka lab2.1)
 
 В директории `py` лежат скрипты, но нужно менять переменную LOCALE:
 
@@ -63,11 +63,11 @@ pip3 install requests
 
 - `lab_test_4.py`
 
-# Тестирование второй работы (2)
+# Тестирование второй работы (2) (aka lab2.2)
 
 В директории `py` лежит скрипт `lab_test_2.py`. Нужно менять переменную LOCALE.
 
-## Тестирование второй работы (3)
+## Тестирование второй работы (3) (aka lab2.3)
 
 Переходить по ссылкам
 
@@ -89,3 +89,24 @@ pip3 install requests
 
 - http://localhost:8080/actuator/metrics/system.cpu.count (метрика: число доступных процессоров для JVM)
 
+# Тестирование третьей работы
+
+## Тестирование третьей работы (1) (aka lab3.1)
+
+<!-- https://slurm.io/blog/tpost/i5ikrm9fj1-hranenie-dannih-v-docker -->
+
+См. директорию `postgres`.
+
+Команда для запуска: `docker-compose --project-name="pg-14" up`
+
+## Тестирование третьей работы (2) (aka lab3.2)
+
+См. директорию `config_server`.
+
+Запустить там проект в IDEA. Перейти по адресам:
+
+- http://localhost:8071/pinkeye/default
+
+- http://localhost:8071/pinkeye/dev
+
+- http://localhost:8071/pinkeye/prod

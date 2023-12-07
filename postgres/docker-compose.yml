@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres # postgres:14.8-alpine3.18
+    environment:
+      POSTGRES_DB: "pinkeye_db"
+      POSTGRES_USER: "suser"
+      POSTGRES_PASSWORD: "pg_pwd_4_labs"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./db_init_scripts:/docker-entrypoint-initdb.d
+      - ./pg-data:/var/lib/postgresql/data
+      # - pg-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+# volumes:
+#   pg-data:
+
+# docker-compose --project-name="pg-14" up -d
+# docker-compose --project-name="pg-14" down
+# psql -c "SELECT version()" -p 5432 -h 127.0.0.1 -U suser -W pinkeye_db
